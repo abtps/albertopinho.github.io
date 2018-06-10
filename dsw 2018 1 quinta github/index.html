@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		
+		<meta charset="utf-8">
+
+		<title>Minha pagina web</title>
+
+		<link rel="stylesheet" type="text/css" href="css/estilos.css">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+	</head>
+
+
+<body class="animated bounceInDown">
+
+
+	<div class="avatar">
+
+		<img src="imagens/avatar.png">
+		
+	</div>
+
+		<div class="content">
+		
+		<h1 class="title">Alberto Pinho</h1>
+
+			<p>
+				Amante da vida, simpicidade, games e tecnologia.<br>
+				Atualmente Technical Expert na Apple Inc.<br>
+				São Paulo, Brasil.
+			</p>
+
+	<table border="1">
+		<tr>
+		<th>Habilidade de Programação</th>
+		<th>Idiomas</th>
+		</tr>
+		<tr>
+		<td>Java, Html</td>
+		<td> Inglês avançado </td>
+		</tr>
+		<tr>
+		<td>C, C++ </td>
+		<td>Espanhol intermediario</td>
+		</tr>
+		<tr>
+		<td>Swift</td>
+		<td>Aspirante em Japones</td>
+		</tr>
+	</table>
+		<br>
+
+	<ol>
+		<li>Universidade Anhembi Morumbi</li>
+		<li>Bacharelado em Engenharia de computação</li>
+		<li>2014 - 2018</li>
+	</ol>
+	
+	
+	<a href="mailto:alberto.ps@me.com?" target="_top">Email</a><br>
+	<a href="https://br.linkedin.com/in/engenheiro-alberto-pinho">LinkedIn</a>
+
+<!-- inicio codigo game -->
+
+<div align="center">
+
+<marquee style="font-family: arial;" behavior="alternate">
+	<span style="color: rgb(255, 160, 120);">&darr;&darr;&darr;&darr; Play SNAKE! &darr;&darr;&darr;&darr;</span></marquee>
+</div>
+
+<body {
+    height: 100%;
+    margin: 0;
+  }
+  body {
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  canvas {
+    border: 1px solid white;
+  }
+
+</style>
+</head>
+<body>
+<canvas width="400" height="400" id="game"></canvas>
+<script>
+var canvas = document.getElementById('game');
+var context = canvas.getContext('2d');
+var grid = 16;
+var snake = {
+  x: 160,
+  y: 160,
+  dx: grid,
+  dy: 0,
+  cells: [],
+  maxCells: 4
+};
+var count = 0;
+var apple = {
+  x: 320,
+  y: 320
+};
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+function loop() {
+  requestAnimationFrame(loop);
+  if (++count < 4) {
+    return;
+  }
+  count = 0;
+  context.clearRect(0,0,canvas.width,canvas.height);
+  snake.x += snake.dx;
+  snake.y += snake.dy;
+  if (snake.x < 0) {
+    snake.x = canvas.width - grid;
+  }
+  else if (snake.x >= canvas.width) {
+    snake.x = 0;
+  }
+  if (snake.y < 0) {
+    snake.y = canvas.height - grid;
+  }
+  else if (snake.y >= canvas.height) {
+    snake.y = 0;
+  }
+  snake.cells.unshift({x: snake.x, y: snake.y});
+  if (snake.cells.length > snake.maxCells) {
+    snake.cells.pop();
+  }
+  context.fillStyle = 'red';
+  context.fillRect(apple.x, apple.y, grid-1, grid-1);
+  context.fillStyle = 'green';
+  snake.cells.forEach(function(cell, index) {
+    context.fillRect(cell.x, cell.y, grid-1, grid-1);
+    if (cell.x === apple.x && cell.y === apple.y) {
+      snake.maxCells++;
+      apple.x = getRandomInt(0, 25) * grid;
+      apple.y = getRandomInt(0, 25) * grid;
+    }
+    for (var i = index + 1; i < snake.cells.length; i++) {
+      if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
+        snake.x = 160;
+        snake.y = 160;
+        snake.cells = [];
+        snake.maxCells = 4;
+        snake.dx = grid;
+        snake.dy = 0;
+        apple.x = getRandomInt(0, 25) * grid;
+        apple.y = getRandomInt(0, 25) * grid;
+      }
+    }
+  });
+}
+document.addEventListener('keydown', function(e) {
+
+  if (e.which === 37 && snake.dx === 0) {
+    snake.dx = -grid;
+    snake.dy = 0;
+  }
+  else if (e.which === 38 && snake.dy === 0) {
+    snake.dy = -grid;
+    snake.dx = 0;
+  }
+  else if (e.which === 39 && snake.dx === 0) {
+    snake.dx = grid;
+    snake.dy = 0;
+  }
+  else if (e.which === 40 && snake.dy === 0) {
+    snake.dy = grid;
+    snake.dx = 0;
+  }
+});
+requestAnimationFrame(loop);
+
+
+
+</script>
+		
+		<div align="center"> 
+		<span style="color: rgb(255, 160, 120);">&darr;&darr;&darr;&darr; Controls with Keyboard: &darr;&darr;&darr;&darr;</span></marquee>
+		</div>
+
+	<br>
+	<div align="center">
+		<marquee direction=up <P align="center"><center> <font color=#7B68EE>Move up &uarr;</font></p></marquee><br>
+		<marquee direction=left <P align="center"><center> <font color=#7B68EE> Move Left &larr;</font></p></marquee><br>
+		<marquee direction=right <P align="center"><center> <font color=#7B68EE> Move Right &rarr;</font></p></marquee><br>
+		<marquee direction=down <P align="center"><center> <font color=#7B68EE> Move dow &darr;</font></p></marquee><br>
+
+	</div>
+
+<!-- fim codigo game -->
+
+		<script>
+		function myFunction() {
+    	document.getElementById("demo").innerHTML = "Obrigado por testar xD";
+		}
+		</script>
+
+			<p id="demo"></p>
+
+		<button type="button" onclick="myFunction()">Try it</button>
+
+</body>
+</html>
